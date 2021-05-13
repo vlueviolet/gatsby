@@ -3,8 +3,7 @@ import styled from '@emotion/styled';
 import { graphql } from 'gatsby';
 import queryString, { ParsedQuery } from 'query-string';
 
-import GlobalStyle from 'components/Common/GlobalStyle';
-import Footer from 'components/Common/Footer';
+import Template from 'components/Common/Template';
 import CategoryList, { CategoryListProps } from 'components/Main/CategoryList';
 import Introduction from 'components/Main/Introduction';
 import PostList, { PostType } from 'components/Main/PostList';
@@ -83,16 +82,14 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
   );
 
   return (
-    <Container>
-      <GlobalStyle />
+    <Template>
       <Introduction profileImage={fluid} />
       <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
       <PostList selectedCategory={selectedCategory} posts={edges} />
-      <Footer />
-    </Container>
+    </Template>
   );
 };
 
@@ -106,6 +103,9 @@ export const query = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           frontmatter {
             title
             summary
